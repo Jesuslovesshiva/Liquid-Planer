@@ -8,8 +8,29 @@ class Haushaltsbuch {
     this._eingabeformular = new Eingabeformular();
     this._monatslistensammlung = new Monatslistensammlung();
     this._gesamtbilanz = new Gesamtbilanz();
+    this._fixkostenPopup = new FixkostenPopup(); // Add this line
     this._wiederherstellen();
   }
+
+  _ShowFixKosten() {
+    const showFixkostenPopupButton = document.getElementById(
+      "show-fixkosten-popup"
+    );
+    if (showFixkostenPopupButton) {
+      showFixkostenPopupButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        this._fixkostenPopup.show();
+      });
+    }
+  }
+
+  _createShowFixkostenPopupButton() {
+    const button = document.createElement("button");
+    button.id = "show-fixkosten-popup";
+    button.textContent = "Fixkosten";
+    return button;
+  }
+
   eintrag_hinzufuegen(eintragsdaten) {
     let neuer_eintrag = new Eintrag(
       eintragsdaten.titel,
@@ -84,5 +105,7 @@ class Haushaltsbuch {
     this._monatslistensammlung.anzeigen();
     this._gesamtbilanz.anzeigen();
     this._speichern();
+    document.body.appendChild(this._createShowFixkostenPopupButton());
+    this._ShowFixKosten();
   }
 }
