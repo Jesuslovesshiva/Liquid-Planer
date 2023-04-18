@@ -21,31 +21,28 @@ class FixkostenPopup {
       e.preventDefault();
       const totalFixkosten = Array.from(form.elements)
         .filter((el) => el.tagName === "INPUT")
-        .reduce((total, input) => total + parseFloat(input.value || 0), 0);
+        .reduce(
+          (total, input) =>
+            total + parseFloat(input.value.replace(",", ".") * 100 || 0),
+          0
+        );
 
       this.updateFixkostenAusgaben(totalFixkosten);
+      this.updateAllMonthsFixkosten(totalFixkosten);
       this.hide();
     });
   }
 
-  updateFixkostenAusgaben(totalFixkosten) {
-    const eintraege = this._monatsliste.getEntries();
-    const existingFixkosten = eintraege.find(
-      (eintrag) => eintrag.name() === "Fixausgaben"
-    );
+  updateFixkostenAusgaben() {
+    const fixedExpenses = haushaltsbuch._fixedExpenses; // Access the fixedExpenses from the haushaltsbuch instance
+    const ausgabenListe = this._html.querySelector("#fixkosten-ausgaben");
+    ausgabenListe.innerHTML = "";
 
-    if (existingFixkosten) {
-      existingFixkosten.setBetrag(totalFixkosten);
-    } else {
-      const fixkostenAusgabe = new Ausgabe(
-        "Fixausgaben",
-        totalFixkosten,
-        new Date()
-      );
-      this._monatsliste.eintrag_hinzufuegen(fixkostenAusgabe);
-    }
-
-    this._monatsliste.update();
+    fixedExpenses.forEach((expense) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${expense.title}: ${expense.amount} €`;
+      ausgabenListe.appendChild(listItem);
+    });
   }
 
   _html_generieren() {
@@ -78,6 +75,13 @@ class FixkostenPopup {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
+        border-radius: 10px;
+        border: black solid 2px
+      }
+
+      .fixkosten-inputfield {
+        border-radius: 10px;
+        
       }
 
       .fixkosten-input label {
@@ -86,6 +90,8 @@ class FixkostenPopup {
       button[type="submit"] {
         align-self: center;
         margin-top: 20px;
+        border-radius: 10px;
+        padding: 0.5rem;
       }
       
     </style>
@@ -96,29 +102,32 @@ class FixkostenPopup {
         <form id="fixkosten-form">
           <div class="fixkosten-input">
             <label for="monthly-rent">Monatliche Miete</label>
-            <input type="number" id="monthly-rent" name="monthly-rent" >
-          </div>
+            <input class="fixkosten-inputfield" type="number" id="monthly-rent" name="monthly-rent" pattern="\\d+(,\\d{1,2})?|\\d+(\\.\\d{1,2})?" step="0.01">
+            </div>
                     <div class="fixkosten-input">
                         <label for="heating">Heizung</label>
-                        <input type="number" id="heating" name="heating" >
+                        <input class="fixkosten-inputfield" type="number" id="heating" name="heating" pattern="\\d+(,\\d{1,2})?" step="0.01">
                     </div>
                     <div class="fixkosten-input">
                         <label for="electricity">Strom</label>
-                        <input type="number" id="electricity" name="electricity">
+                        <input class="fixkosten-inputfield" type="number" id="electricity" name="electricity" pattern="\\d+(,\\d{1,2})?" step="0.01">
                     </div>
                     <div class="fixkosten-input">
                         <label for="car">Auto</label>
-                        <input type="number" id="car" name="car" >
+                        <input class="fixkosten-inputfield" type="number" id="car" name="car" pattern="\\d+(,\\d{1,2})?" step="0.01">
                     </div>
                     <div class="fixkosten-input">
                         <label for="internet">Internet</label>
-                        <input type="number" id="internet" name="internet" >
+                        <input class="fixkosten-inputfield" type="number" id="internet" name="internet" pattern="\\d+(,\\d{1,2})?" step="0.01">
                     </div>
                     <div class="fixkosten-input">
                         <label for="other">Andere</label>
-                        <input type="number" id="other" name="other" >
+                        <input class="fixkosten-inputfield" type="number" id="other" name="other" pattern="\\d+(,\\d{1,2})?" step="0.01">
                     </div>
                     <button type="submit">Speichern</button>
+                    <h3></h3>
+                    <ul id="fixkosten-ausgaben">
+                    </ul>
                 </form>
             </div>
         </div>`;
@@ -126,6 +135,32 @@ class FixkostenPopup {
     const div = document.createElement("div");
     div.innerHTML = popupHtml;
     return div;
+  }
+
+  updateAllMonthsFixkosten(totalFixkosten) {
+    for (const monatsliste of haushaltsbuch._monatslistensammlung
+      ._monatslisten) {
+      const month = monatsliste._monat;
+      const year = monatsliste._jahr;
+      const entries =
+        haushaltsbuch._monatslistensammlung.getEntriesByMonthAndYear(
+          year,
+          month
+        );
+
+      const fixkostenEntry = entries.find(
+        (entry) => entry._titel === "Fixkosten" && entry._typ === "ausgabe"
+      );
+
+      if (!fixkostenEntry) {
+        haushaltsbuch.eintrag_hinzufuegen({
+          titel: "Fixkosten",
+          betrag: totalFixkosten,
+          typ: "ausgabe",
+          datum: new Date(year, month - 1, 1),
+        });
+      }
+    }
   }
 
   show() {

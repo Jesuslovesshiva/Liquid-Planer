@@ -12,6 +12,18 @@ class Haushaltsbuch {
     this._wiederherstellen();
   }
 
+  showFixkostenPopup() {
+    const currentMonth = new Date().getMonth() + 1;
+    const currentYear = new Date().getFullYear();
+    const monatsliste = this._monatslistensammlung.getEntriesByMonthAndYear(
+      currentMonth,
+      currentYear
+    );
+
+    const fixkostenPopup = new FixkostenPopup(monatsliste);
+    fixkostenPopup.show();
+  }
+
   _ShowFixKosten() {
     const showFixkostenPopupButton = document.getElementById(
       "show-fixkosten-popup"
