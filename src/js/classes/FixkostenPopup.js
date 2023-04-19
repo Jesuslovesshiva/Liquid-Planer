@@ -66,33 +66,61 @@ class FixkostenPopup {
         padding: 20px;
         display: flex;
         flex-direction: column;
-        background-color: gray;
+        background-color: #C0C0C0;
         border-radius: 20px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+
+        
       }
 
       .fixkosten-input {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        border: black solid 2px
-      }
+        margin-bottom: 15px;  
+        padding-left: 1em;
+        height: 0%
+        box-shadow: 0px 1px 2px 0px;
+        background: #C0C0C0;
+        background-clip: padding-box;
+        border-radius: 1.5rem; 
+        text-align: center;
+        border-right: none;
+        background-color: #e9ecef;
+        color: #495057;
+        text-align: center;
+        border: 0.1rem solid #ced4da;
+          }
 
       .fixkosten-inputfield {
-        border-radius: 10px;
+        border-right: none;
+        border-left: none;
+        padding: 0.375rem 0.75rem;
+        -webkit-box-flex: 1;
+
+        color: #495057;
+ 
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+          box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+          line-height: 2.5rem;
+          border:  #ced4da;
+          font-family: "Oswald", Helvetica, sans-serif;
+          font-weight: 300;
+          font-size: 1.5rem;
+          letter-spacing: 0.2rem;
+          box-sizing: inherit;
+          line-height: 2.5rem;
+
+          border-top-right-radius: 1.5rem;
+          border-bottom-right-radius: 1.5rem;
+
         
       }
 
       .fixkosten-input label {
         margin-right: 10px;
       }
-      button[type="submit"] {
-        align-self: center;
-        margin-top: 20px;
-        border-radius: 10px;
-        padding: 0.5rem;
-      }
+
       
     </style>
 
@@ -101,7 +129,7 @@ class FixkostenPopup {
         <h2 style='margin-bottom: 40px;'>Fixkosten eingeben</h2>
         <form id="fixkosten-form">
           <div class="fixkosten-input">
-            <label for="monthly-rent">Monatliche Miete</label>
+            <label for="monthly-rent">Miete</label>
             <input class="fixkosten-inputfield" type="number" id="monthly-rent" name="monthly-rent" pattern="\\d+(,\\d{1,2})?|\\d+(\\.\\d{1,2})?" step="0.01">
             </div>
                     <div class="fixkosten-input">
@@ -123,10 +151,12 @@ class FixkostenPopup {
                     <div class="fixkosten-input">
                         <label for="other">Andere</label>
                         <input class="fixkosten-inputfield" type="number" id="other" name="other" pattern="\\d+(,\\d{1,2})?" step="0.01">
+                        
                     </div>
-                    <button type="submit">Speichern</button>
+                    <button class="standard" type="submit">Speichern</button>
                     <h3></h3>
                     <ul id="fixkosten-ausgaben">
+                    
                     </ul>
                 </form>
             </div>
@@ -178,3 +208,13 @@ class FixkostenPopup {
     }, 300); // Match this duration with the duration of the closing animation
   }
 }
+
+const divElement = document.createElement("div");
+
+divElement.classList.add("grid-item");
+
+divElement.style.gridColumn = "1 / 2"; // second column
+divElement.style.gridRow = "3 / 4"; // third row
+divElement.style.marginBottom = "100vh"; //
+
+document.body.appendChild(divElement);
