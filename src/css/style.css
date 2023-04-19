@@ -135,7 +135,8 @@ h6 {
   margin-left: 2.8rem;
   height: 30%;
   width: 30%;
-
+  white-space: normal;
+  word-wrap: break-word;
   justify-self: end;
 
   display: inline-block;
