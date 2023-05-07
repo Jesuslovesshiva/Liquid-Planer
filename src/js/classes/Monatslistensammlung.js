@@ -75,6 +75,12 @@ class Monatslistensammlung {
     this._html = this._html_generieren();
     this.anzeigen();
   }
+  _entfernen() {
+    let monatslistensammlung = document.querySelector("#monatslisten");
+    if (monatslistensammlung !== null) {
+      monatslistensammlung.remove();
+    }
+  }
 
   anzeigen() {
     let eingabeformular_container = document.querySelector(
