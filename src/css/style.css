@@ -146,7 +146,7 @@ h6 {
   text-decoration: none;
   position: relative;
   color: #000;
-  background: #fff;
+  background-color: #e9ecef;
   line-height: 30px;
 
   font-size: 20px;
@@ -648,4 +648,25 @@ button.standard:focus {
       scroll 0% 0%;
   background-size: cover; /* stretches the gradient to cover the entire element */
   height: 100%;
+}
+
+/**
+ * Basic CSS Media Query Template
+ * TODO: I should probably use Sass...
+ * Author: Michael Vieth
+ * ------------------------------------------
+ *  Responsive Grid Media Queries - 1280, 1024, 768, 480
+ *   1280-1024   - desktop (default grid)
+ *   1024-768    - tablet landscape
+ *   768-480     - tablet 
+ *   480-less    - phone landscape & smaller
+ * --------------------------------------------
+ */
+@media all and (min-width: 1024px) and (max-width: 1280px) {
+}
+
+@media all and (max-width: 930px) {
+  #show-fixkosten-popup {
+    font-size: 0rem;
+  }
 }

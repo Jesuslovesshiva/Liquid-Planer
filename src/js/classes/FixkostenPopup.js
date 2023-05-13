@@ -34,7 +34,7 @@ class FixkostenPopup {
   }
 
   updateFixkostenAusgaben() {
-    const fixedExpenses = haushaltsbuch._fixedExpenses; // Access the fixedExpenses from the haushaltsbuch instance
+    const fixedExpenses = haushaltsbuch._fixedExpenses;
     const ausgabenListe = this._html.querySelector("#fixkosten-ausgaben");
     ausgabenListe.innerHTML = "";
 
@@ -177,18 +177,20 @@ class FixkostenPopup {
           year,
           month
         );
-
-      const fixkostenEntry = entries.find(
-        (entry) => entry._titel === "Fixkosten" && entry._typ === "ausgabe"
+      const spans = document.querySelectorAll("span.titel");
+      const fixkostenSpanVorhanden = Array.from(spans).find(
+        (span) => span.textContent === "Fixkosten"
       );
-
-      if (!fixkostenEntry) {
+      if (!fixkostenSpanVorhanden) {
         haushaltsbuch.eintrag_hinzufuegen({
           titel: "Fixkosten",
           betrag: totalFixkosten,
           typ: "ausgabe",
           datum: new Date(year, month - 1, 1),
         });
+        console.log("Couldn't find the expected span element");
+      } else {
+        console.log("Found the expected span element");
       }
     }
   }
@@ -218,3 +220,17 @@ divElement.style.gridRow = "3 / 4"; // third row
 divElement.style.marginBottom = "100vh"; //
 
 document.body.appendChild(divElement);
+
+// function checkFixkosten() {
+//   const spans = document.querySelectorAll("span.titel");
+//   const fixkostenSpan = Array.from(spans).find(
+//     (span) => span.textContent === "Fixkosten"
+//   );
+//   if (fixkostenSpan) {
+//     console.log("Found the expected span element");
+//     return false;
+//   } else {
+//     console.log("Couldn't find the expected span element");
+//     return true;
+//   }
+// }
