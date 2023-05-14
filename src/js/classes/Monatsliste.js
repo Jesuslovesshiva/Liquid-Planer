@@ -65,6 +65,9 @@ class Monatsliste {
   _html_generieren() {
     let monatsliste = document.createElement("article");
     monatsliste.setAttribute("class", "monatsliste");
+    // Add data attributes for the year and month
+    monatsliste.setAttribute("data-year", this._jahr);
+    monatsliste.setAttribute("data-month", this._monat);
 
     let ueberschrift = document.createElement("h2");
 

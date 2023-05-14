@@ -60,7 +60,6 @@ class FixkostenPopup {
       .fixkosten-popup-overlay {
         backdrop-filter: blur(1px);
         z-index: 1000;
-      border-radius: 0px;
 
       }
       .fixkosten-popup {
@@ -69,10 +68,8 @@ class FixkostenPopup {
         flex-direction: column;
         background-color: #C0C0C0;
         border-radius: 20px;
-        background-color: #e9ecef;
-        box-shadow: rgb(255, 230, 130) -2px -2px 0px 2px,
-          rgb(236, 160, 110) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
-        transition: all 0.2s;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+
         
       }
 
@@ -180,18 +177,10 @@ class FixkostenPopup {
           year,
           month
         );
-
-      // Find the <article> for the current month/year
-      const articleElement = document.querySelector(
-        `article.monatsliste[data-year="${year}"][data-month="${month}"]`
-      );
-
-      // Find the "span.titel" elements within the current <article>
-      const spans = articleElement.querySelectorAll("span.titel");
+      const spans = document.querySelectorAll("span.titel");
       const fixkostenSpanVorhanden = Array.from(spans).find(
         (span) => span.textContent === "Fixkosten"
       );
-
       if (!fixkostenSpanVorhanden) {
         haushaltsbuch.eintrag_hinzufuegen({
           titel: "Fixkosten",
@@ -222,15 +211,15 @@ class FixkostenPopup {
   }
 }
 
-// const divElement = document.createElement("div");
+const divElement = document.createElement("div");
 
-// divElement.classList.add("grid-item");
+divElement.classList.add("grid-item");
 
-// divElement.style.gridColumn = "1 / 2"; // second column
-// divElement.style.gridRow = "3 / 4"; // third row
-// divElement.style.marginBottom = "100vh"; //
+divElement.style.gridColumn = "1 / 2"; // second column
+divElement.style.gridRow = "3 / 4"; // third row
+divElement.style.marginBottom = "100vh"; //
 
-// document.body.appendChild(divElement);
+document.body.appendChild(divElement);
 
 // function checkFixkosten() {
 //   const spans = document.querySelectorAll("span.titel");

@@ -41,8 +41,6 @@
 
 html {
   font-size: 62.5%;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 *,
@@ -67,20 +65,9 @@ option {
 
 body {
   margin: 0;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: [col-1-start] 2rem 1fr 2rem [col-1-end 2rem col-2-start]
-    2rem 2fr 2rem [col-2-end 2rem col-3-start] 2rem 1fr 2rem [col-3-end];
-  grid-template-columns: [col-1-start] 1fr [col-1-end col-2-start] 2fr [col-2-end col-3-start] 1fr [col-3-end];
-  -ms-grid-rows: [row-1-start] 2rem auto 2rem [row-1-end 2rem row-2-start] 2rem
-    auto 2rem [row-2-end 2rem row-3-start] 2rem auto 2rem [row-3-end];
-  grid-template-rows: [row-1-start] auto [row-1-end row-2-start] auto [row-2-end row-3-start] auto [row-3-end];
-  grid-template-areas:
-    "navigationsleisten-bereich navigationsleisten-bereich navigationsleisten-bereich"
-    ". eingabeformular-bereich gesamtbilanz-bereich"
-    ". monatslisten-bereich gesamtbilanz-bereich";
-  gap: 2rem 2rem;
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 h1,
@@ -111,91 +98,19 @@ h6 {
 /* === Navigationsleiste === */
 
 #navigationsleiste {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 5;
-  grid-area: navigationsleisten-bereich;
+  order: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  background-color: #67b7d1;
+  background-color: #343a40;
   line-height: 8rem;
 }
 
 #navigationsleiste > a {
   text-decoration: none;
-}
-
-#show-fixkosten-popup {
-  border-radius: 3rem;
-  margin-left: 2.8rem;
-  height: 30%;
-  width: 30%;
-  white-space: normal;
-  word-wrap: break-word;
-  justify-self: end;
-
-  display: inline-block;
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-  text-decoration: none;
-  position: relative;
-  color: #000;
-  background-color: #e9ecef;
-  line-height: 30px;
-
-  font-size: 20px;
-  font-weight: 200;
-  box-shadow: rgb(255, 198, 30) -2px -2px 0px 2px,
-    rgb(246, 104, 194) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
-  transition: all 0.2s;
-}
-
-#show-fixkosten-popup:hover {
-  box-shadow: rgb(255, 198, 30) -2px -2px 0px 2px,
-  rgb(246, 104, 194)) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
-  transition: all 0.2s;
-  box-shadow: rgb(246, 104, 194) -2px -2px 0px 2px,
-    rgb(255, 198, 0) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
-}
-
-.fixkosten-popup-overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 1.5rem;
-}
-
-#fixed-costs-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  border-radius: 1.5rem;
-}
-
-#fixed-costs-form-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 1.5rem;
 }
 
 #markenname {
@@ -205,7 +120,6 @@ h6 {
   font-family: "Amatic SC", cursive;
   line-height: inherit;
   vertical-align: bottom;
-  cursor: default;
 }
 
 #markenname > [class*="fa-"] {
@@ -217,19 +131,10 @@ h6 {
 /* === Eingabeformular === */
 
 #eingabeformular-container {
-  -ms-grid-row: 3;
-  -ms-grid-column: 3;
-  grid-area: eingabeformular-bereich;
+  order: 2;
   padding: 3rem 3rem;
   background-color: #e9ecef;
   border-radius: 1.5rem;
-
-  color: #000;
-  background-color: #e9ecef;
-
-  box-shadow: rgb(255, 230, 130) -2px -2px 0px 2px,
-    rgb(166, 170, 230) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
-  transition: all 0.2s;
 }
 
 #eingabeformular-container > .eingabeformular-zeile {
@@ -405,9 +310,7 @@ button.standard:focus {
 /* === MONATSLISTEN === */
 
 #monatslisten {
-  -ms-grid-row: 5;
-  -ms-grid-column: 3;
-  grid-area: monatslisten-bereich;
+  order: 4;
 }
 
 .monatsliste {
@@ -545,22 +448,13 @@ button.standard:focus {
 /* === Gesamtbilanz === */
 
 #gesamtbilanz {
-  -ms-grid-row: 3;
-  -ms-grid-row-span: 3;
-  -ms-grid-column: 5;
-  grid-area: gesamtbilanz-bereich;
+  order: 3;
   padding: 3rem 3rem;
-  margin-right: 2.8rem;
   background-color: #e9ecef;
-  border-radius: 1.5rem;
-  -ms-grid-row-align: start;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+
   align-self: start;
-  margin-right: 50px;
-  color: #000;
-  background-color: #e9ecef;
-  box-shadow: rgb(255, 230, 130) -2px -2px 0px 2px,
-    rgb(236, 160, 110) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
-  transition: all 0.2s;
 }
 
 #gesamtbilanz > .gesamtbilanz-zeile {
@@ -608,36 +502,11 @@ button.standard:focus {
   background-color: #dc3545;
 }
 
-@keyframes openAnimation {
-  0% {
-    opacity: 0;
-    transform: rotateY(-60deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotateY(0);
-  }
+#show-fixkosten-popup {
+  order: 5;
 }
 
-.fixkosten-popup.showing {
-  animation: openAnimation 0.1s ease-in-out forwards;
-}
-
-@keyframes closeAnimation {
-  0% {
-    opacity: 1;
-    transform: rotateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: rotateY(60deg);
-  }
-}
-
-.fixkosten-popup.hiding {
-  animation: closeAnimation 0.1s ease-in-out forwards;
-}
-html {
+.body {
   position: relative; /* optional, but recommended */
   background: radial-gradient(
         at 18% 99%,
@@ -658,11 +527,9 @@ html {
     rgba(0, 0, 0, 0)
       radial-gradient(at 57% 33%, rgb(218, 83, 228) 0px, #a299ff 50%) repeat
       scroll 0% 0%;
-  background-size: contain; /*From cover to contain*/
-  min-height: 100vh; /* fill up the screen*/
-  padding-bottom: 1em; /* make some space at the bottom, a bit of makeup */
+  background-size: cover; /* stretches the gradient to cover the entire element */
+  height: 100%;
 }
-
 /**
  * Basic CSS Media Query Template
  * TODO: I should probably use Sass...
@@ -695,62 +562,15 @@ html {
 
 @media all and (max-width: 900px) {
   #gesamtbilanz {
-    grid-area: gesamtbilanz-bereich;
-    grid-row: 3 / span 2;
-    grid-column: 2;
     width: 100%;
   }
   #monatslisten {
-    grid-row: 4;
-    grid-column: 2;
   }
 }
 
 @media all and (max-width: 800px) {
   #show-fixkosten-popup {
-    position: absolute;
-    margin-top: 1em;
-    right: 5vw;
-    width: 10%;
-    height: 8%;
-  }
-}
-
-@media all and (max-width: 500px) {
-  aside#gesamtbilanz {
-    padding: 1.3em;
-  }
-  ,
-  section#eingabeformular-container {
-    padding: 1.3em;
-  }
-  ,
-  #show-fixkosten-popup {
-    position: absolute;
-    margin-top: 1em;
-    right: 4vw;
-    width: 8%;
-    height: 5%;
-    font-size: 140%;
-  }
-}
-
-@media all and (max-width: 400px) {
-  #show-fixkosten-popup {
-    position: absolute;
-    margin-top: 1em;
-    right: 3vw;
-    width: 10%;
-    height: 5%;
-    font-size: 120%;
-  }
-  html {
-    position: absolute; /* optional, but recommended */
-    min-height: 100vh;
-    background-size: cover;
-    box-sizing: border-box; /* include the padding into min-height calcunlation */
-    padding-bottom: 20em;
-    margin: auto;
+    font-size: 0rem;
   }
 }
 
