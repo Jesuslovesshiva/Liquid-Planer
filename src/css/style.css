@@ -239,6 +239,7 @@ h6 {
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
+  cursor: default;
 }
 
 #eingabeformular-container > .eingabeformular-zeile > * {
@@ -272,7 +273,7 @@ h6 {
   background-color: #e9ecef;
   color: #495057;
   text-align: center;
-  cursor: text;
+  cursor: pointer;
 }
 
 [class$="-eingabe-gruppe"] > :first-child {
@@ -561,6 +562,7 @@ button.standard:focus {
   box-shadow: rgb(255, 230, 130) -2px -2px 0px 2px,
     rgb(236, 160, 110) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
   transition: all 0.2s;
+  cursor: default;
 }
 
 #gesamtbilanz > .gesamtbilanz-zeile {
