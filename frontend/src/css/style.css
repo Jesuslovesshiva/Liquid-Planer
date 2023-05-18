@@ -83,15 +83,12 @@ body {
   min-height: 100%;
   margin-left: 2em;
   margin-right: 2em;
-
 }
 
 body > #navigationsleiste {
   margin-left: -2em;
   margin-right: -2em;
-
 }
-
 
 h1,
 h2,
@@ -811,7 +808,6 @@ html {
   transition: all 0.2s;
   cursor: default;
   width: 100%;
-  align-self
 }
 
 .user-inputfield {
@@ -825,9 +821,21 @@ html {
   transition: border-color 0.3s ease-in-out;
 }
 
+.user-inputfield-btn {
+  display: block;
+  width: 50%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 0.5rem;
+  transition: border-color 0.3s ease-in-out;
+  font-size: 1em;
+}
+
 .user-inputfield:focus {
   outline: none;
-  border-color: #80CBC4;
+  border-color: #80cbc4;
 }
 
 .user-inputfield::placeholder {
@@ -835,11 +843,7 @@ html {
 }
 
 .user-inputfield[type="button"] {
-  
 }
-
-
-
 
 /**
  * Basic CSS Media Query Template
@@ -879,7 +883,6 @@ html {
   body > #navigationsleiste {
     margin-left: 0em;
     margin-right: 0em;
-  
   }
   #user-login-register {
     grid-area: eingabeformular-bereich;

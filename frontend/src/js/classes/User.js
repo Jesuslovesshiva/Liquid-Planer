@@ -26,7 +26,7 @@ class User {
     const loginButton = document.createElement("button");
     loginButton.type = "submit";
     loginButton.textContent = "Login";
-    loginButton.classList.add("user-inputfield");
+    loginButton.classList.add("user-inputfield-btn");
 
     loginButton.addEventListener("click", () => {
       this.login(loginInput.value, passwordInput.value);
@@ -35,7 +35,7 @@ class User {
     const registerButton = document.createElement("button");
     registerButton.type = "submit";
     registerButton.textContent = "Register";
-    registerButton.classList.add("user-inputfield");
+    registerButton.classList.add("user-inputfield-btn");
 
     registerButton.addEventListener("click", () => {
       this.createUser(loginInput.value, passwordInput.value);
