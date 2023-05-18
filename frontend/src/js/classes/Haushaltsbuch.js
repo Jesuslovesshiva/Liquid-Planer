@@ -3,13 +3,14 @@
 class Haushaltsbuch {
   constructor() {
     this._eintraege = [];
-    this._fixedExpenses = []; // Initialize the fixedExpenses array
+    this._fixedExpenses = [];
     this._navigationsleiste = new Navigationsleiste();
     this._eingabeformular = new Eingabeformular();
     this._monatslistensammlung = new Monatslistensammlung();
     this._gesamtbilanz = new Gesamtbilanz();
     this._fixkostenPopup = new FixkostenPopup();
-    this._chartCreator = new ChartCreator(); // Create an instance of ChartCreator
+    this._chartCreator = new ChartCreator();
+    this._currentUser = new User();
     this._createAndAppendButtons();
     this._wiederherstellen();
   }
@@ -67,8 +68,6 @@ class Haushaltsbuch {
     const buttonContainer = this._createButtonContainer();
     this._createShowFixkostenPopupButton(buttonContainer);
     this._createShowChartPopupButton(buttonContainer);
-    // Append the buttonContainer to the appropriate element
-    // Here we append it to the body, but you may need to adjust this
     document.body.appendChild(buttonContainer);
   }
 
@@ -81,11 +80,9 @@ class Haushaltsbuch {
     const closeButton = document.createElement("button");
     closeButton.textContent = "Close";
 
-    // Add an event listener to the close button
     closeButton.addEventListener("click", () => {
-      // Remove the popup from the DOM when the close button is clicked
       popup.remove();
-      this._popup = null; // Clear the popup variable
+      this._popup = null;
     });
 
     // Append the close button to the popup container
@@ -94,7 +91,7 @@ class Haushaltsbuch {
     // Append the popup container to the body
     document.body.appendChild(popup);
 
-    this._popup = popup; // Update the popup variable
+    this._popup = popup;
   }
 
   eintrag_hinzufuegen(eintragsdaten) {
@@ -172,5 +169,6 @@ class Haushaltsbuch {
     this._gesamtbilanz.anzeigen();
     this._speichern();
     this._ShowFixKosten();
+    this._currentUser._createUserLoginRegister();
   }
 }
