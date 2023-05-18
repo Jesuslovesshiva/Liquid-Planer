@@ -3,10 +3,11 @@
 </script>
 
 <nav id="navigationsleiste">
-  <a href="_">
+  <a href="/">
     <span id="markenname">{markenname}</span>
   </a>
 </nav>
 
 <style>
+
 </style>

@@ -1,4 +1,6 @@
 <script>
+      import { getNotificationsContext } from 'svelte-notifications';
+    const { addNotification } = getNotificationsContext();
     export let fetchExpenses;
 
     async function handleFormSubmission(event) {
@@ -48,23 +50,39 @@
   
           if (response.ok) {
             const createdEntry = await response.json();
+            addNotification({
+              text: 'Erfolgreich hinzugefügt.',
+              position: 'top-center',
+              type: 'success',
+              removeAfter: 2500,
+
+            })
             await fetchExpenses();
             console.log('New entry created:', createdEntry);
             event.target.reset();
           } else {
             console.error('Error creating entry:', response.status);
             // Handle error case if needed
+            addNotification({
+              text: 'Fehler beim Hinzufügen.',
+              position: 'top-center',
+              type: 'error',
+              removeAfter: 2500,
+
+            })
           }
         } catch (error) {
           console.error('Error creating entry:', error);
-          // Handle error case if needed
+          
         }
       } else {
-        const error = new Fehler(
-          'Folgende Felder wurden nicht korrekt ausgefüllt:',
-          formErrors
-        );
-        error.anzeigen();
+        addNotification({
+              text: 'Fülle alle Felder aus',
+              position: 'top-center',
+              type: 'error',
+              removeAfter: 2500,
+
+            })
       }
     }
 </script>
@@ -133,6 +151,8 @@
     </form>
 </section>
 <style>
-    /* Add your desired styles here */
+    #eingabeformular-container {
+      margin: 30px 0px;
+    }
 </style>
   

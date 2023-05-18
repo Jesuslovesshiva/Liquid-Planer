@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "start": "sirv public --single"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
@@ -19,6 +19,11 @@
     "svelte": "^3.55.0"
   },
   "dependencies": {
-    "sirv-cli": "^2.0.0"
+    "chart.js": "^4.3.0",
+    "sirv-cli": "^2.0.0",
+    "svelte-chartjs": "^3.1.2",
+    "svelte-notifications": "^0.9.98",
+    "svelte-routing": "^1.8.8",
+    "svelte-toast": "^1.0.0"
   }
 }
