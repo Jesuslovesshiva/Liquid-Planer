@@ -56,10 +56,12 @@ class FixkostenPopup {
     input[type="number"] {
       -moz-appearance: textfield;
     }
+
       .fixkosten-popup-overlay {
         backdrop-filter: blur(1px);
         z-index: 1000;
       border-radius: 0px;
+
       }
       .fixkosten-popup {
         padding: 20px;
@@ -71,8 +73,10 @@ class FixkostenPopup {
   box-shadow: rgb(255, 230, 130) -2px -2px 0px 2px,
     rgb(236, 160, 110) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
   transition: all 0.2s;
+
         
       }
+
       .fixkosten-input {
         display: flex;
         justify-content: space-between;
@@ -91,11 +95,13 @@ class FixkostenPopup {
         text-align: center;
         border: 0.1rem solid #ced4da;
           }
+
       .fixkosten-inputfield {
         border-right: none;
         border-left: none;
         padding: 0.375rem 0.75rem;
         -webkit-box-flex: 1;
+
         color: #495057;
  
         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -108,15 +114,20 @@ class FixkostenPopup {
           letter-spacing: 0.2rem;
           box-sizing: inherit;
           line-height: 2.5rem;
+
           border-top-right-radius: 1.5rem;
           border-bottom-right-radius: 1.5rem;
+
         
       }
+
       .fixkosten-input label {
         margin-right: 10px;
       }
+
       
     </style>
+
     <div class="fixkosten-popup-overlay" style="background-color: rgba(0, 0, 0, 0.5);">
       <div class="fixkosten-popup">
         <h2 style='margin-bottom: 40px;'>Fixkosten eingeben</h2>
@@ -147,10 +158,7 @@ class FixkostenPopup {
                         
                     </div>
                     <button class="standard" type="submit">Speichern</button>
-                    <h3></h3>
-                    <ul id="fixkosten-ausgaben">
-                    
-                    </ul>
+
                 </form>
             </div>
         </div>`;
@@ -189,7 +197,9 @@ class FixkostenPopup {
           typ: "ausgabe",
           datum: new Date(year, month - 1, 1),
         });
+        console.log("Couldn't find the expected span element");
       } else {
+        console.log("Found the expected span element");
       }
     }
   }
@@ -209,3 +219,27 @@ class FixkostenPopup {
     }, 300); // Match this duration with the duration of the closing animation
   }
 }
+
+// const divElement = document.createElement("div");
+
+// divElement.classList.add("grid-item");
+
+// divElement.style.gridColumn = "1 / 2"; // second column
+// divElement.style.gridRow = "3 / 4"; // third row
+// divElement.style.marginBottom = "100vh"; //
+
+// document.body.appendChild(divElement);
+
+// function checkFixkosten() {
+//   const spans = document.querySelectorAll("span.titel");
+//   const fixkostenSpan = Array.from(spans).find(
+//     (span) => span.textContent === "Fixkosten"
+//   );
+//   if (fixkostenSpan) {
+//     console.log("Found the expected span element");
+//     return false;
+//   } else {
+//     console.log("Couldn't find the expected span element");
+//     return true;
+//   }
+// }

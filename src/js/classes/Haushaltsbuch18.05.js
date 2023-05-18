@@ -165,12 +165,31 @@ class Haushaltsbuch {
     }
   }
 
+  // initializeMediaQuery = () => {
+  //   const mediaQuery = window.matchMedia("(max-width: 1308px)");
+  //   const fixkostenButton = document.getElementById("show-fixkosten-popup");
+
+  //   const updateFixkostenButton = () => {
+  //     if (mediaQuery.matches) {
+  //       fixkostenButton.textContent = "🏡";
+  //     } else {
+  //       fixkostenButton.textContent = "Fixkosten";
+  //     }
+  //   };
+  //   // Call the function once to set the initial text content
+  //   updateFixkostenButton();
+  //   // Add an event listener to the media query object
+  //   mediaQuery.addEventListener("change", updateFixkostenButton);
+  // };
+
   start() {
     this._navigationsleiste.anzeigen();
     this._eingabeformular.anzeigen();
     this._monatslistensammlung.anzeigen();
     this._gesamtbilanz.anzeigen();
     this._speichern();
+
     this._ShowFixKosten();
+    // this.initializeMediaQuery();
   }
 }
