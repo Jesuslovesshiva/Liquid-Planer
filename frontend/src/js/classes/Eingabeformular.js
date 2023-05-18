@@ -3,6 +3,45 @@
 class Eingabeformular {
   constructor() {
     this._html = this._html_generieren();
+    this._form = this._html.querySelector("#eingabeformular");
+    this._form.addEventListener("submit", (e) => this._handleFormSubmission(e));
+  }
+
+  // Function to process form data and handle form submission
+  handleFormSubmission(e) {
+    e.preventDefault();
+    let formulardaten = this._formulardaten_verarbeiten(
+      this._formulardaten_holen(e)
+    );
+    let formular_fehler = this._formulardaten_validieren(formulardaten);
+    if (formular_fehler.length === 0) {
+      const entryData = {
+        titel: formulardaten.titel,
+        betrag: formulardaten.betrag,
+        typ: formulardaten.typ,
+        datum: formulardaten.datum,
+      };
+      // Call the createNewEntry function from apiService.js
+      window.apiService
+        .createEntry(entryData)
+        .then((createdEntry) => {
+          // Process the created entry
+          console.log("New entry created:", createdEntry);
+          // Clear form and update UI as needed
+          this._form.reset();
+          this._datum_aktualisieren();
+        })
+        .catch((error) => {
+          console.error("Error creating entry:", error);
+          // Handle error case if needed
+        });
+    } else {
+      let fehler = new Fehler(
+        "Folgende Felder wurden nicht korrekt ausgefüllt:",
+        formular_fehler
+      );
+      fehler.anzeigen();
+    }
   }
 
   _formulardaten_holen(e) {
