@@ -1,43 +1,8 @@
-/* === Fonts === */
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
-@font-face {
-  font-family: "Amatic SC";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Amatic SC Regular"), local("AmaticSC-Regular"),
-    url("./../fonts/amatic-sc/amatic-sc-v13-latin-regular.woff2")
-      format("woff2"),
-    url("./../fonts/amatic-sc/amatic-sc-v13-latin-regular.woff") format("woff");
+body {
+  font-family: "Roboto", sans-serif;
 }
-
-@font-face {
-  font-family: "Oswald";
-  font-style: normal;
-  font-weight: 300;
-  src: local(""),
-    url("./../fonts/oswald/oswald-v31-latin-300.woff2") format("woff2"),
-    url("./../fonts/oswald/oswald-v31-latin-300.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Oswald";
-  font-style: normal;
-  font-weight: 400;
-  src: local(""),
-    url("./../fonts/oswald/oswald-v31-latin-regular.woff2") format("woff2"),
-    url("./../fonts/oswald/oswald-v31-latin-regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Oswald";
-  font-style: normal;
-  font-weight: 700;
-  src: local(""),
-    url("./../fonts/oswald/oswald-v31-latin-700.woff2") format("woff2"),
-    url("./../fonts/oswald/oswald-v31-latin-700.woff") format("woff");
-}
-
-/* === Allgemeines CSS === */
 
 html {
   font-size: 62.5%;
@@ -58,7 +23,6 @@ textarea,
 button,
 select,
 option {
-  font-family: "Oswald", Helvetica, sans-serif;
   font-weight: 300;
   font-size: 1.5rem;
   line-height: 1.5rem;
@@ -246,7 +210,6 @@ h6 {
   font-size: 5rem;
   text-transform: uppercase;
   color: #fff;
-  font-family: "Amatic SC", cursive;
   line-height: inherit;
   vertical-align: bottom;
   cursor: default;
