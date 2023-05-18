@@ -168,7 +168,7 @@ h6 {
   grid-area: test;
 
   border-radius: 3rem;
-  margin-left: 2.8rem;
+  margin-left: 5.5rem;
   height: 30%;
   width: 30%;
   white-space: normal;
@@ -834,6 +834,7 @@ html {
     right: 50px; /* Adjust the right position as needed */
     width: 10%;
     height: 80px; /* Set a fixed height in pixels */
+    z-index: 999; /* Ensure the element stays on top */
   }
   #show-chart-popup {
     position: fixed; /* Change to fixed positioning */
@@ -841,6 +842,7 @@ html {
     right: 50px; /* Adjust the right position as needed */
     width: 10%;
     height: 80px; /* Set a fixed height in pixels */
+    z-index: 999; /* Ensure the element stays on top */
   }
 }
 
@@ -853,7 +855,6 @@ html {
       rgb(246, 104, 194) 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 1px 2px;
   }
   #show-chart-popup {
-    position: fixed; /* Change to fixed positioning */
     top: 8em; /* Adjust the top position as needed */
     right: 35px; /* Adjust the right position as needed */
     width: 8%;
@@ -865,36 +866,67 @@ html {
 
 @media all and (max-width: 600px) {
   #show-fixkosten-popup {
-    position: fixed; /* Change to fixed positioning */
     top: 0.6em; /* Adjust the top position as needed */
     right: 35px; /* Adjust the right position as needed */
     width: 12%;
     height: 35px; /* Set a fixed height in pixels */
   }
   #show-chart-popup {
-    position: fixed; /* Change to fixed positioning */
     top: 0.6em; /* Adjust the top position as needed */
-    right: 110px; /* Adjust the right position as needed */
+    right: 120px; /* Adjust the right position as needed */
     width: 12%;
     height: 35px; /* Set a fixed height in pixels */
   }
   #navigationsleiste {
+    z-index: 999;
     display: flex; /* Change display properties to flex */
     justify-content: flex-start; /* Align items to the left */
     align-items: center; /* Vertically center items */
+    position: fixed; /* Add fixed positioning */
+    top: 0; /* Place the navbar at the top */
+    left: 0; /* Align the navbar to the left */
+    width: 100%; /* Occupy the full width of the viewport */
   }
   #markenname {
     margin-left: 2em;
+  }
+  #eingabeformular-container {
+    margin-top: 6em;
+  }
+}
+
+@media all and (max-width: 450px) {
+  html {
+    position: absolute;
+    min-height: 100vh;
+  }
+
+  #show-chart-popup {
+    right: 90px;
+  }
+  #show-fixkosten-popup {
+    right: 25px; /* Adjust the right position as needed */
+  }
+  #markenname {
+    margin-left: 1em;
   }
 }
 
 @media all and (max-width: 400px) {
   html {
-    position: absolute; /* optional, but recommended */
-    min-height: 100vh;
-    background-size: cover;
-    box-sizing: border-box; /* include the padding into min-height calcunlation */
-    padding-bottom: 20em;
+    font-size: 40%;
+  }
+
+  #show-chart-popup {
+    width: 12%;
+    height: 32px;
+  }
+  #show-fixkosten-popup {
+    width: 12%;
+    height: 32px;
+  }
+  #markenname {
+    margin-left: 1em;
   }
 }
 
