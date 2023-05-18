@@ -1,1 +1,0 @@
-{"mappings":"AAAA;AAEA,IAAI,gBAAgB,IAAI;AACxB,cAAc,KAAK","sources":["Haushaltsbuch/src/js/main.js"],"sourcesContent":["\"use strict\";\r\n\r\nlet haushaltsbuch = new Haushaltsbuch();\r\nhaushaltsbuch.start();\r\n"],"names":[],"version":3,"file":"index.00e50164.js.map","sourceRoot":"/__parcel_source_root/"}
