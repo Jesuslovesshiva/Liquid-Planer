@@ -1,12 +1,14 @@
 const express = require("express");
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 require("dotenv").config();
+const cors = require("cors");
 
 // Init app ------------------------------------------------------------------------
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cors());
 
 // Cosmos DB configuration ---------------------------------------------------------
 
