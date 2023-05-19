@@ -1,15 +1,18 @@
 const express = require("express");
+const authMiddleware = require("../middleware/auth"); // assuming your express routes are one level up from /auth
 
 module.exports = (container) => {
   const router = express.Router();
+  router.use(authMiddleware); // use the auth middleware for all routes
 
   // Create expense -------------------------------------------------------------------
 
   router.post("/", async (req, res) => {
     try {
-      const data = req.body;
+      const data = { ...req.body, user: req.user }; // add current user's id to the new expense
+      console.log(data);
       const { resource: createdDocument } = await container.items.create(data);
-
+      console.log(createdDocument);
       return res.status(201).json(createdDocument);
     } catch (error) {
       console.log(error);
@@ -22,8 +25,12 @@ module.exports = (container) => {
   router.get("/", async (req, res) => {
     try {
       const { resources: expenses } = await container.items
-        .readAll()
+        .query({
+          query: "SELECT * from c WHERE c.user = @user",
+          parameters: [{ name: "@user", value: req.user }],
+        })
         .fetchAll();
+
       return res.status(200).json(expenses);
     } catch (error) {
       console.log(error);
@@ -42,6 +49,10 @@ module.exports = (container) => {
         return res.status(404).json({ message: "Expense not found." });
       }
 
+      if (expense.user !== req.user) {
+        return res.status(403).json({ message: "Unauthorized." });
+      }
+
       return res.status(200).json(expense);
     } catch (error) {
       console.log(error);
@@ -56,7 +67,18 @@ module.exports = (container) => {
   router.delete("/:id", async (req, res) => {
     try {
       const { id } = req.params;
+      const { resource: expense } = await container.item(id, id).read();
+
+      if (!expense) {
+        return res.status(404).json({ message: "Expense not found." });
+      }
+
+      if (expense.user !== req.user) {
+        return res.status(403).json({ message: "Unauthorized." });
+      }
+
       await container.item(id, id).delete();
+
       return res.status(204).end();
     } catch (error) {
       console.log(error.message);

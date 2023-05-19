@@ -11,7 +11,9 @@
 
 	async function fetchExpenses() {
 		try {
-			const response = await fetch('http://localhost:3000/expenses');
+			const response = await fetch('http://localhost:3000/expenses', {
+			credentials: 'include', // Include credentials in the request
+			});
 			expenses = await response.json();
 			console.log(expenses)
 			calculateSums();

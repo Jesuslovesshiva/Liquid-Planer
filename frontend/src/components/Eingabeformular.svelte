@@ -46,6 +46,7 @@
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(entryData),
+            credentials: 'include'
           });
   
           if (response.ok) {
