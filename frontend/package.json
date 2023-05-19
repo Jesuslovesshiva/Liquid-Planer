@@ -19,7 +19,12 @@
     "svelte": "^3.55.0"
   },
   "dependencies": {
+    "axios": "^1.4.0",
+    "bcryptjs": "^2.4.3",
     "chart.js": "^4.3.0",
+    "cookie-parser": "^1.4.6",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.0",
     "sirv-cli": "^2.0.0",
     "svelte-chartjs": "^3.1.2",
     "svelte-notifications": "^0.9.98",

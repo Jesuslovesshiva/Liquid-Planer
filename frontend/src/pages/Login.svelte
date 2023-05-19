@@ -2,17 +2,23 @@
     import { Link } from 'svelte-routing';
     import { getNotificationsContext } from 'svelte-notifications';
     const { addNotification } = getNotificationsContext();
-    
-    let username = '';
+	import { navigate } from 'svelte-routing';
+
+    let email = '';
     let password = '';
+    
     
     async function handleLogin() {
         const res = await fetch('http://localhost:3000/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, password }),
+            credentials: 'include'
+
         });
+        console.log(res.headers)
         if (res.ok) {
+           
             // TODO ---------------- handle successful login
             console.log('Login successful!');
             addNotification({
@@ -22,6 +28,7 @@
               removeAfter: 2500,
 
             })
+            navigate('/');
         } else {
             // // TODO ---------------- handle error
             console.log('Login failed!');
@@ -78,9 +85,17 @@
         <div class="center-inner">
         <h2>Login</h2>
         <p>Welcome back!</p>
-        <input bind:value={username} placeholder="Username" />
-            <input bind:value={password} type="password" placeholder="Password" />
-            <button on:click={handleLogin}>Log In</button>
+        <form on:submit|preventDefault={handleLogin}>
+            <label>
+              Email:
+              <input type="email" bind:value={email} />
+            </label>
+            <label>
+              Password:
+              <input type="password" bind:value={password} />
+            </label>
+            <button type="submit">Login</button>
+          </form>
             <Link to="/signup">Signup</Link>
         </div>
     </div>

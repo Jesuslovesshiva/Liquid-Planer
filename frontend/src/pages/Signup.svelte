@@ -1,22 +1,45 @@
 <script>
     import { Link } from 'svelte-routing';
-    let username = '';
+    import { getNotificationsContext } from 'svelte-notifications';
+    const { addNotification } = getNotificationsContext();
+	import { navigate } from 'svelte-routing';
+
+    let email = '';
     let password = '';
-    
-    async function handleSignup() {
+
+    const signup = async () => {
         const res = await fetch('http://localhost:3000/auth/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, password }),
+            credentials: 'include'
+
         });
+        console.log(res.headers)
         if (res.ok) {
-            // handle successful signup
+           
+            // TODO ---------------- handle successful login
             console.log('Signup successful!');
+            addNotification({
+              text: 'Welcome on Board! Login now.',
+              position: 'top-center',
+              type: 'success',
+              removeAfter: 2500,
+
+            })
+            navigate('/login');
         } else {
-            // handle error
+            // // TODO ---------------- handle error
             console.log('Signup failed!');
+            addNotification({
+              text: 'Error during signup.',
+              position: 'top-center',
+              type: 'error',
+              removeAfter: 2500,
+
+            })
         }
-    }
+    };
     </script>
     
     <style>
@@ -60,9 +83,17 @@
         <div class="center-inner">
         <h2>Signup</h2>
         <p>Create your account.</p>
-        <input bind:value={username} placeholder="Username" />
-        <input bind:value={password} type="password" placeholder="Password" />
-        <button on:click={handleSignup}>Sign Up</button>
+        <form on:submit|preventDefault={signup}>
+            <label>
+              Email:
+              <input type="email" bind:value={email} />
+            </label>
+            <label>
+              Password:
+              <input type="password" bind:value={password} />
+            </label>
+            <button type="submit">Signup</button>
+          </form>
         <Link to="/login">Go to Login</Link>
         </div>
     </div>
